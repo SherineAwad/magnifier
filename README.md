@@ -24,8 +24,8 @@ where n is the number of cores and rulename is the rule you like to use like GCB
 ## CoverageHistogram rule 
 
    Outputs a histogram of coverage of your sample, a sample output example is:
-   
-    ![coveragehist.png](outputs/coveragehist.png.png)
+  
+   ![coveragehist.png](outputs/coveragehist.png) 
 
 ### Run all investigation rules 
     snakemake -jn 
