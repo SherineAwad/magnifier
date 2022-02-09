@@ -8,8 +8,9 @@
 Magnifier 
 ============================================================
 
-Magnifier is a snakemake  pipeline thathelp magnifies what are in your sample, check GC bias, coverage, etc. More ways of invetigating your samples will be included as we go. 
-It takes sam file as input. Update config files for different with you samples names and other parameters. 
+Magnifier is a snakemake  pipeline that help magnifies what's in your sample, check GC bias, coverage, etc. More ways of investigating your samples will be included as we go.
+ 
+Magnifier takes sam file(s) as input. Update config files for different with you samples names and other parameters. 
 
     snakemake -jn 
 
