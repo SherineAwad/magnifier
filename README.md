@@ -50,4 +50,4 @@ and to print command in dry run use:
 
 
 ##### TODO 
-1. Add more tools for invetigation 
+1. Add more tools for investigation 
