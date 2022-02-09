@@ -19,7 +19,7 @@ where n is the number of cores and rulename is the rule you like to use like GCB
 
    Investigates GCbias in your samples. It out put several metrics (txt files) and wraps them up in a figure, as follows: 
     
-   ![GCBias.png](GCBias.png)
+   ![GCBias.png](outputs/GCBias.png)
 
 ### Run all investigation rules 
     snakemake -jn 
