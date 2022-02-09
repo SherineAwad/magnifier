@@ -15,11 +15,17 @@ Magnifier takes sam file(s) as input. Update config files for different with you
   
 where n is the number of cores and rulename is the rule you like to use like GCBias or Coverage Histogram or other rules. 
 
-##GCBias rule 
+## GCBias rule 
 
    Investigates GCbias in your samples. It out put several metrics (txt files) and wraps them up in a figure, as follows: 
     
-   ![GCBias.png](outputs/GCBias.png)
+   ![GCBias.png](outputs/GCbias.png)
+
+## CoverageHistogram rule 
+
+   Outputs a histogram of coverage of your sample, a sample output example is:
+   
+    ![coveragehist.png](outputs/coveragehist.png.png)
 
 ### Run all investigation rules 
     snakemake -jn 
