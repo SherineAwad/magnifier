@@ -7,6 +7,7 @@ rule all:
         expand("{sample}.alignment_metrics.txt", sample=config['SAMPLES']),
         expand("{sample}.gc_bias_metrics.txt", sample=config['SAMPLES']),
         expand("{sample}_quality.txt", sample=config['SAMPLES']),
+        expand("{sample}.insert_size_metrics.txt",sample=config['SAMPLES']), 
         #expand("{sample}_screen.txt", sample=config['SAMPLES'])
  
 
@@ -86,3 +87,16 @@ rule CoverageHistogram:
       """
       samtools coverage {input}  --histogram  -o {output}
       """
+
+rule InsertSize:
+    input:
+       "{sample}.sorted.bam"
+    output:
+       "{sample}.insert_size_metrics.txt",
+       "{sample}_insert_size_histogram.pdf"
+    shell:
+       """
+        picard CollectInsertSizeMetrics I={input} O={output[0]} H={output[1]} M=0.5
+      """
+
+

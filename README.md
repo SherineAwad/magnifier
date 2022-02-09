@@ -27,6 +27,12 @@ where n is the number of cores and rulename is the rule you like to use like GCB
   
    ![coveragehist.png](outputs/coveragehist.png) 
 
+## InsertSize
+
+   Outputs several metrics for insert size, and a wrapped up figure as follows: 
+
+   ![insertsize.png](outputs/insertsize.png)
+
 ### Run all investigation rules 
     snakemake -jn 
 
