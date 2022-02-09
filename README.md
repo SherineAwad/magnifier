@@ -10,6 +10,13 @@ Magnifier is a snakemake  pipeline that help magnifies what's in your sample, ch
  
 Magnifier takes sam file(s) as input. Update config files for different with you samples names and other parameters. 
 
+### Run rule by rule  
+   snakemake -jn rulename 
+  
+where n is the number of cores and rulename is the rule you like to use like GCBias or Coverage Histogram or other rules. 
+
+
+### Run all investigation rules 
     snakemake -jn 
 
 where n is the number of cores for example for 10 cores use:
