@@ -1,35 +1,27 @@
 configfile: "config.yaml"
 
+
+with open(config['SAMPLES']) as fp:
+    SAMPLES= fp.read().splitlines()
+print(SAMPLES)
+
+
 rule all:
       input:
-        expand("{sample}.sorted.bam", sample=config['SAMPLES']),
-        expand("{sample}.coverage.histogram", sample=config['SAMPLES']),
-        expand("{sample}.alignment_metrics.txt", sample=config['SAMPLES']),
-        expand("{sample}.gc_bias_metrics.txt", sample=config['SAMPLES']),
-        expand("{sample}_quality.txt", sample=config['SAMPLES']),
-        expand("{sample}.insert_size_metrics.txt",sample=config['SAMPLES']), 
-        #expand("{sample}_screen.txt", sample=config['SAMPLES'])
+        expand("{sample}.sam", sample=SAMPLES),
+        expand("{sample}.coverage.histogram", sample=SAMPLES),
+        expand("{sample}.alignment_metrics.txt", sample=SAMPLES),
+        expand("{sample}.gc_bias_metrics.txt", sample=SAMPLES),
+        expand("{sample}_quality.txt", sample=SAMPLES),
+        expand("{sample}.insert_size_metrics.txt",sample=SAMPLES), 
+        expand("{sample}.wgs_metrics.txt", sample=SAMPLES),
+        #expand("{sample}_screen.txt", sample=SAMPLES)
  
 
-rule sort:
-       input:
-            "{sample}.bam"
-       output:
-            "{sample}.sorted.bam"
-       params:
-            "{sample}.tmp.sorted"
-       log:
-            "{sample}.sorted.log"
-       conda: 'env/env-align.yaml'
-       shell:
-            """
-                samtools sort -T {params} -o {output} {input}
-                samtools index {output} 
-            """
 
 rule check_quality: 
       input:
-        "{sample}.sorted.bam" 
+        "{sample}.sam" 
       output:
         "{sample}_quality.txt"
       shell: 
@@ -53,7 +45,7 @@ rule check_contaminate:
 
 rule GCBias:
    input:
-      "{sample}.sorted.bam",
+      "{sample}.sam",
    params:
       genome=config['GENOME']
    output:
@@ -68,7 +60,7 @@ rule GCBias:
 
 rule CollectAlignmentSummaryMetrics: 
    input:
-      "{sample}.sorted.bam",
+      "{sample}.sam",
    params:
       genome=config['GENOME']
    output:
@@ -80,7 +72,7 @@ rule CollectAlignmentSummaryMetrics:
 
 rule CoverageHistogram: 
     input: 
-      "{sample}.sorted.bam",
+      "{sample}.sam",
     output: 
        "{sample}.coverage.histogram"
     shell: 
@@ -90,7 +82,7 @@ rule CoverageHistogram:
 
 rule InsertSize:
     input:
-       "{sample}.sorted.bam"
+       "{sample}.sam"
     output:
        "{sample}.insert_size_metrics.txt",
        "{sample}_insert_size_histogram.pdf"
@@ -99,4 +91,15 @@ rule InsertSize:
         picard CollectInsertSizeMetrics I={input} O={output[0]} H={output[1]} M=0.5
       """
 
-
+rule WGSMetrics:
+    input:
+      "{sample}.sam"
+    params:
+       genome=config['GENOME'],
+       min_base_quality = config['MIN_BASE_QUALITY']
+    output:
+       "{sample}.wgs_metrics.txt"
+    shell:
+        """
+        picard CollectWgsMetrics I={input} O={output} R={params.genome}.fasta Q={params.min_base_quality}
+        """
