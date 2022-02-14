@@ -10,18 +10,14 @@ Magnifier is a snakemake  pipeline that help magnifies what's in your sample, ch
  
 Magnifier takes sam file(s) as input. Update config files for different with you samples names and other parameters. 
 
-### Run rule by rule  
-   snakemake -jn rulename 
-  
-where n is the number of cores and rulename is the rule you like to use like GCBias or Coverage Histogram or other rules. 
 
-## GCBias rule 
+## GCBias  
 
    Investigates GCbias in your samples. It out put several metrics (txt files) and wraps them up in a figure, as follows: 
     
    ![GCBias.png](outputs/GCbias.png)
 
-## CoverageHistogram rule 
+## CoverageHistogram  
 
    Outputs a histogram of coverage of your sample, a sample output example is:
   
@@ -32,6 +28,13 @@ where n is the number of cores and rulename is the rule you like to use like GCB
    Outputs several metrics for insert size, and a wrapped up figure as follows: 
 
    ![insertsize.png](outputs/insertsize.png)
+
+
+## check_contaminate 
+
+   Outputs a nice plot as below to check contamination: 
+  
+   ![sample1_screen.png](outputs/sample1_screen.png)
 
 ### Run all investigation rules 
     snakemake -jn 

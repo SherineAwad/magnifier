@@ -1,5 +1,5 @@
 SAMPLES: "samples.tsv"
 
 GENOME: "/Data/resources/Homo_sapiens_assembly38"
-CONF: "/Data/fastqscreen/FastQ_Screen_Genomes/fastq_screen.conf"
+CONF: "/rds/project/rds-O11U8YqSuCk/SM/annotations/FastQ_Screen_Genomes/" 
 MIN_BASE_QUALITY: 5 

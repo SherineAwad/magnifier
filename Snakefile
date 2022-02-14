@@ -15,7 +15,7 @@ rule all:
         expand("{sample}_quality.txt", sample=SAMPLES),
         expand("{sample}.insert_size_metrics.txt",sample=SAMPLES), 
         expand("{sample}.wgs_metrics.txt", sample=SAMPLES),
-        #expand("{sample}_screen.txt", sample=SAMPLES)
+        expand("{sample}_screen.txt", sample=SAMPLES)
  
 
 
@@ -30,7 +30,7 @@ rule check_quality:
           samtools view {input} | awk '{{if($5>=5) {{print $0}}}}' | wc -l >> {output}
           """ 
 
-rule check_contaminate: 
+rule check_contamination: 
      input: 
          "{sample}.r_1.fq.gz"
      output: 
@@ -40,7 +40,6 @@ rule check_contaminate:
      shell: 
         """
          fastq_screen --conf {params.CONF} {input}
-         
         """
 
 rule GCBias:
