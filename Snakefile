@@ -9,13 +9,14 @@ print(SAMPLES)
 rule all:
       input:
         expand("{sample}.sam", sample=SAMPLES),
-        expand("{sample}.coverage.histogram", sample=SAMPLES),
-        expand("{sample}.alignment_metrics.txt", sample=SAMPLES),
-        expand("{sample}.gc_bias_metrics.txt", sample=SAMPLES),
-        expand("{sample}_quality.txt", sample=SAMPLES),
-        expand("{sample}.insert_size_metrics.txt",sample=SAMPLES), 
-        expand("{sample}.wgs_metrics.txt", sample=SAMPLES),
-        expand("{sample}_screen.txt", sample=SAMPLES)
+        expand("{sample}_alignments.png", sample = SAMPLES)
+        #expand("{sample}.coverage.histogram", sample=SAMPLES),
+        #expand("{sample}.alignment_metrics.txt", sample=SAMPLES),
+        #expand("{sample}.gc_bias_metrics.txt", sample=SAMPLES),
+        #expand("{sample}_quality.txt", sample=SAMPLES),
+        #expand("{sample}.insert_size_metrics.txt",sample=SAMPLES), 
+        #expand("{sample}.wgs_metrics.txt", sample=SAMPLES),
+        #expand("{sample}_screen.txt", sample=SAMPLES)
  
 
 
@@ -23,11 +24,17 @@ rule check_quality:
       input:
         "{sample}.sam" 
       output:
-        "{sample}_quality.txt"
+        "{sample}_alignments.txt",
+        "{sample}_alignments.png"
       shell: 
-          """ 
-          samtools view {input} | awk '{{if($5<5) {{print $0}}}}'  | wc -l >  {output}
-          samtools view {input} | awk '{{if($5>=5) {{print $0}}}}' | wc -l >> {output}
+          """
+          samtools view -c -F 260 {input} >> {output[0]} 
+          samtools view -c -F 256 {input} >> {output[0]}
+          samtools view -c -f 4 {input} >> {output[0]} 
+          samtools view -c {input} >> {output[0]} 
+          samtools view {input} | awk '{{if($5<5) {{print $0}}}}'  | wc -l >>  {output[0]}
+          samtools view {input} | awk '{{if($5>=20) {{print $0}}}}' | wc -l >> {output[0]}
+          python scripts/calc_stats.py {output[0]} {output[1]} 
           """ 
 
 rule check_contamination: 
@@ -39,7 +46,7 @@ rule check_contamination:
          CONF=config['CONF'] 
      shell: 
         """
-         fastq_screen --conf {params.CONF} {input}
+         fastq_screen --conf {params.CONF} {input} --aligner bowtie
         """
 
 rule GCBias:

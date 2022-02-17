@@ -11,6 +11,12 @@ Magnifier is a snakemake  pipeline that help magnifies what's in your sample, ch
 Magnifier takes sam file(s) as input. Update config files for different with you samples names and other parameters. 
 
 
+## Mapping Percentages and Quality 
+
+ Percentages of primary and secondary alignments. In addition to percentage of unmapped reads and quality of mapped reads for each sample. 
+
+   ![sample1_alignments.png](outputs/sample1_alignments.png)
+
 ## GCBias  
 
    Investigates GCbias in your samples. It out put several metrics (txt files) and wraps them up in a figure, as follows: 
@@ -75,4 +81,9 @@ and to print command in dry run use:
 
 
 ##### TODO 
-1. Add more tools for investigation 
+1. Add more tools for investigation
+
+#### References 
+
+1. https://www.bioinformatics.babraham.ac.uk/projects/fastq_screen
+2. http://broadinstitute.github.io/picard/  
