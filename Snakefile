@@ -9,15 +9,72 @@ print(SAMPLES)
 rule all:
       input:
         expand("{sample}.sam", sample=SAMPLES),
-        expand("{sample}_alignments.png", sample = SAMPLES)
-        #expand("{sample}.coverage.histogram", sample=SAMPLES),
-        #expand("{sample}.alignment_metrics.txt", sample=SAMPLES),
-        #expand("{sample}.gc_bias_metrics.txt", sample=SAMPLES),
-        #expand("{sample}_quality.txt", sample=SAMPLES),
-        #expand("{sample}.insert_size_metrics.txt",sample=SAMPLES), 
-        #expand("{sample}.wgs_metrics.txt", sample=SAMPLES),
-        #expand("{sample}_screen.txt", sample=SAMPLES)
+        expand("{sample}_alignments.png", sample = SAMPLES),
+        expand("{sample}.coverage.histogram", sample=SAMPLES),
+        expand("{sample}.alignment_metrics.txt", sample=SAMPLES),
+        expand("{sample}.gc_bias_metrics.txt", sample=SAMPLES),
+        expand("{sample}.insert_size_metrics.txt",sample=SAMPLES), 
+        expand("{sample}.wgs_metrics.txt", sample=SAMPLES),
+        expand("{sample}_screen.txt", sample=SAMPLES)
  
+
+if config['PAIRED']:
+    rule trim:
+       input:
+           r1 = "{sample}.r_1.fq.gz",
+           r2 = "{sample}.r_2.fq.gz"
+       output:
+           "galore/{sample}.r_1_val_1.fq.gz",
+           "galore/{sample}.r_2_val_2.fq.gz"
+       conda: 'env/env-trim.yaml'
+       shell:
+           """
+           mkdir -p galore
+           mkdir -p fastqc
+           trim_galore --gzip --retain_unpaired --trim1 --fastqc --fastqc_args "--outdir fastqc" -o galore --paired {input.r1} {input.r2}
+           """
+    rule tosam:
+        input:
+             r1 = "galore/{sample}.r_1_val_1.fq.gz",
+             r2 = "galore/{sample}.r_2_val_2.fq.gz"
+        params:
+             genome=config['GENOME'],
+             mem = config['MEMORY'],
+        output:
+             "{sample}.sam"
+        conda: 'env/env-align.yaml'
+        shell:
+            """
+            bbmap.sh {params.mem} in={input[0]} in2={input[1]} out={output} ref={params.genome}
+            """
+else:
+     rule trim:
+       input:
+           "{sample}.fq.gz",
+
+       output:
+           "galore/{sample}_trimmed.fq.gz",
+       conda: 'env/env-trim.yaml'
+       shell:
+           """
+           mkdir -p galore
+           mkdir -p fastqc
+           trim_galore --gzip --retain_unpaired --trim1 --fastqc --fastqc_args "--outdir fastqc" -o galore {input}
+           """
+     rule tosam:
+        input:
+            "galore/{sample}_trimmed.fq.gz"
+        params:
+            genome=config['GENOME'],
+            mem = config['MEMORY'],
+        output:
+           "{sample}.sam"
+        conda: 'env/env-align.yaml'
+        shell:
+          """
+          bbmap.sh {params.mem} in={input} out={output} ref={params.genome}
+          """
+
 
 
 rule check_quality: 
@@ -95,7 +152,7 @@ rule InsertSize:
     shell:
        """
         picard CollectInsertSizeMetrics I={input} O={output[0]} H={output[1]} M=0.5
-      """
+       """
 
 rule WGSMetrics:
     input:

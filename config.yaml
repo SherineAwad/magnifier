@@ -1,5 +1,6 @@
 SAMPLES: "samples.tsv"
-
+PAIRED: TRUE
 GENOME: "/Data/resources/Homo_sapiens_assembly38"
 CONF: "/rds/project/rds-O11U8YqSuCk/SM/annotations/FastQ_Screen_Genomes/" 
-MIN_BASE_QUALITY: 5 
+MIN_BASE_QUALITY: 5
+MEMORY: "-Xmx40g" 
