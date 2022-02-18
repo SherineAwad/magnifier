@@ -15,7 +15,7 @@ rule all:
         expand("{sample}.gc_bias_metrics.txt", sample=SAMPLES),
         expand("{sample}.insert_size_metrics.txt",sample=SAMPLES), 
         expand("{sample}.wgs_metrics.txt", sample=SAMPLES),
-        #expand("{sample}_screen.txt", sample=SAMPLES)
+        expand("{sample}.r_1_screen.txt", sample=SAMPLES)
  
 
 if config['PAIRED']:
@@ -110,9 +110,9 @@ rule check_quality:
 
 rule check_contamination: 
      input: 
-         "{sample}.r_1.fq.gz"
+         "{sample}.r_1.fq.gz",
      output: 
-         "{sample}_screen.txt" 
+         "{sample}.r_1_screen.txt" 
      params: 
          CONF=config['CONF'] 
      shell: 
