@@ -10,7 +10,7 @@ Magnifier is a snakemake  pipeline that help magnifies what's in your sample, ch
  
 Update config files for different with you samples names and other parameters. 
 
-##Plots
+## Plots
  
 #### Mapping Percentages and Quality 
 
