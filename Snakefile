@@ -8,9 +8,10 @@ print(SAMPLES)
 
 rule all:
       input:
+        expand("{sample}.readlength.txt", sample=SAMPLES),
         expand("{sample}.sorted.bam", sample=SAMPLES),
         expand("{sample}_alignments.png", sample = SAMPLES),
-        expand("{sample}.coverage.histogram", sample=SAMPLES),
+        #expand("{sample}.coverage.histogram", sample=SAMPLES),
         expand("{sample}.alignment_metrics.txt", sample=SAMPLES),
         expand("{sample}.gc_bias_metrics.txt", sample=SAMPLES),
         expand("{sample}.insert_size_metrics.txt",sample=SAMPLES), 
@@ -47,11 +48,20 @@ if config['PAIRED']:
             """
             bbmap.sh {params.mem} in={input[0]} in2={input[1]} out={output} ref={params.genome}.fa
             """
+    rule read_length:
+       input:
+          "galore/{sample}.r_1_val_1.fq.gz",
+          "galore/{sample}.r_2_val_2.fq.gz"
+       output:
+          "{sample}.readlength.txt"
+       shell:
+          """
+          readlength.sh in1={input[0]} in2={input[1]}  out={output}
+          """
 else:
      rule trim:
        input:
-           "{sample}.fq.gz",
-
+           "{sample}.fq.gz"
        output:
            "galore/{sample}_trimmed.fq.gz",
        conda: 'env/env-trim.yaml'
@@ -66,31 +76,36 @@ else:
             "galore/{sample}_trimmed.fq.gz"
         params:
             genome=config['GENOME'],
-            mem = config['MEMORY'],
+            mem = config['MEMORY']
         output:
            "{sample}.bam"
         conda: 'env/env-align.yaml'
         shell:
-          """
-          bbmap.sh {params.mem} in={input} out={output} ref={params.genome}.fa 
-          """
+            """
+            bbmap.sh {params.mem} in={input} out={output} ref={params.genome}.fa 
+            """
+     
+     rule read_length:
+         input:
+            "galore/{sample}_trimmed.fq.gz"
+         output:
+            "{sample}.readlength.txt"
+         shell:
+            """
+            bash readlength.sh in={input} out={output}
+            """     
 
 rule sort:
-       input:
-            "{sample}.bam"
-       output:
-            "{sample}.sorted.bam"
-       params:
-            "{sample}.tmp.sorted"
-       log:
-            "{sample}.sorted.log"
+       input: "{sample}.bam"
+       output: "{sample}.sorted.bam"
+       params:"{sample}.tmp.sorted"
+       log: "{sample}.sorted.log"
        conda: 'env/env-align.yaml'
        shell:
-            """
-                samtools sort -T {params} -o {output} {input}
-                samtools index {output}
-            """
-
+           """
+             samtools sort -T {params} -o {output} {input}
+             samtools index {output}
+           """
 rule check_quality: 
       input:
         "{sample}.sorted.bam" 

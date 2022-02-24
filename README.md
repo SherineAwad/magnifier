@@ -10,33 +10,34 @@ Magnifier is a snakemake  pipeline that help magnifies what's in your sample, ch
  
 Update config files for different with you samples names and other parameters. 
 
-
-## Mapping Percentages and Quality 
+##Plots
+ 
+#### Mapping Percentages and Quality 
 
 You will get a plot of percentages of primary and secondary alignments. In addition to percentage of unmapped reads and quality of mapped reads for each sample. 
 
    ![sample1_alignments.png](outputs/sample1_alignments.png)
 
-## GCBias  
+#### GCBias  
 
-   Investigates GCbias in your samples. It out put several metrics (txt files) and wraps them up in a figure, as follows: 
+   Investigates GCbias in your samples. It output several metrics (txt files) and wraps them up in a figure, as follows: 
     
    ![GCBias.png](outputs/GCbias.png)
 
-## CoverageHistogram  
+#### CoverageHistogram  
 
    Outputs a histogram of coverage of your sample, a sample output example is:
   
    ![coveragehist.png](outputs/coveragehist.png) 
 
-## InsertSize
+#### InsertSize
 
    Outputs several metrics for insert size, and a wrapped up figure as follows: 
 
    ![insertsize.png](outputs/insertsize.png)
 
 
-## check_contaminate 
+#### check_contaminate 
 
    Outputs a nice plot as below to check contamination: 
   
