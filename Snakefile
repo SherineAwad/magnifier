@@ -10,14 +10,14 @@ rule all:
       input:
         expand("{sample}.readlength.txt", sample=SAMPLES),
         expand("{sample}.sorted.bam", sample=SAMPLES),
-        expand("{sample}_alignments.png", sample = SAMPLES),
-        #expand("{sample}.coverage.histogram", sample=SAMPLES),
+        expand("{sample}.coverage.histogram.txt", sample=SAMPLES),
         expand("{sample}.alignment_metrics.txt", sample=SAMPLES),
         expand("{sample}.gc_bias_metrics.txt", sample=SAMPLES),
         expand("{sample}.insert_size_metrics.txt",sample=SAMPLES), 
         expand("{sample}.wgs_metrics.txt", sample=SAMPLES),
-        expand("{sample}.r_1_screen.txt", sample=SAMPLES)
- 
+        expand("{sample}.r_1_screen.txt", sample=SAMPLES),
+        expand("{sample}.alignments.txt", sample =SAMPLES),
+        expand("{sample}.html",sample =SAMPLES)
 
 if config['PAIRED']:
     rule trim:
@@ -110,17 +110,15 @@ rule check_quality:
       input:
         "{sample}.sorted.bam" 
       output:
-        "{sample}_alignments.txt",
-        "{sample}_alignments.png"
+        "{sample}_alignments.txt"
       shell: 
           """
-          samtools view -c -F 260 {input} >> {output[0]} 
-          samtools view -c -F 256 {input} >> {output[0]}
-          samtools view -c -f 4 {input} >> {output[0]} 
+          samtools view -c -F 260 {input} >> {output} 
+          samtools view -c -F 256 {input} >> {output}
+          samtools view -c -f 4 {input} >> {output} 
           samtools view -c {input} >> {output[0]} 
-          samtools view {input} | awk '{{if($5<5) {{print $0}}}}'  | wc -l >>  {output[0]}
-          samtools view {input} | awk '{{if($5>=20) {{print $0}}}}' | wc -l >> {output[0]}
-          python scripts/calc_stats.py {output[0]} {output[1]} 
+          samtools view {input} | awk '{{if ($5<5) {{print $0}} }}'  | wc -l >>  {output}
+          samtools view {input} | awk '{{if ($5>=20) {{print $0}} }}' | wc -l >> {output}
           """ 
 
 rule check_contamination: 
@@ -166,7 +164,7 @@ rule CoverageHistogram:
     input: 
       "{sample}.sorted.bam",
     output: 
-       "{sample}.coverage.histogram"
+       "{sample}.coverage.histogram.txt"
     shell: 
       """
       samtools coverage {input}  --histogram  -o {output}
@@ -195,3 +193,24 @@ rule WGSMetrics:
         """
         picard CollectWgsMetrics I={input} O={output} R={params.genome}.fa Q={params.min_base_quality}
         """
+
+
+rule wrapper: 
+    input: 
+      "{sample}.alignments.txt" 
+      #"{sample}.coverage.histogram.txt",
+      #"{sample}.alignment_metrics.txt",
+      #"{sample}.gc_bias_metrics.txt",
+      #"{sample}.insert_size_metrics.txt",
+      #"{sample}.wgs_metrics.txt",
+      #"{sample}.r_1_screen.txt"
+    output:
+       "{sample}.alignments.png", 
+       "{sample}.html" 
+    params: 
+       "{sample}" 
+    shell:
+       """  
+       python scripts/plot.py {params} 
+       python scripts/wraptohtml.py {params}
+       """

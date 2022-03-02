@@ -1,0 +1,13 @@
+#Reads:	1960
+#Bases:	94842
+#Max:	49
+#Min:	21
+#Avg:	48.4
+#Median:	40
+#Mode:	40
+#Std_Dev:	1.0
+#Read Length Histogram:
+#Length	reads	pct_reads	cum_reads	cum_pct_reads	bases	pct_bases	cum_bases	cum_pct_bases
+20	3	0.153%	1960	100.000%	75	0.079%	94842	100.000%
+30	8	0.408%	1957	99.847%	273	0.288%	94767	99.921%
+40	1949	99.439%	1949	99.439%	94494	99.633%	94494	99.633%
