@@ -16,7 +16,7 @@ Update config files for different with you samples names and other parameters.
 
 You will get a plot of percentages of primary and secondary alignments. In addition to percentage of unmapped reads and quality of mapped reads for each sample. 
 
-   ![sample1_alignments.png](outputs/sample1_alignments.png)
+   ![sample1_alignments.png](outputs/sample1.s_1.alignments.png)
 
 #### GCBias  
 
@@ -45,7 +45,7 @@ You will get a plot of percentages of primary and secondary alignments. In addit
 
 ### Wrapper all output to HTML Page 
 
-   [All plots in html page](/outputs/sample1.s_1.html) 
+   [sample1.s_1.html](outputs/sample1.s_1.html) 
 
 
 where n is the number of cores for example for 10 cores use:
