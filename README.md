@@ -43,9 +43,9 @@ You will get a plot of percentages of primary and secondary alignments. In addit
   
    ![sample1_screen.png](outputs/sample1_screen.png)
 
-### Wrapper to HTML output page 
+### Wrapper all output to HTML Page 
 
-   [All plots in html page](outputs/sample1.s_1.html) 
+   [All plots in html page](/outputs/sample1.s_1.html) 
 
 
 where n is the number of cores for example for 10 cores use:
