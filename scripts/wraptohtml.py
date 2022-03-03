@@ -10,7 +10,6 @@ def html_report(sample):
     outtext = sample
     hfile = open(outfile, "w+") 
     message = """<html>
-    <head></head>
     """
     hfile.write("<h1> Contamination Check </h1> <br> </br>  ")
     contamination_image =sample+".r_1_screen.png"
@@ -66,7 +65,6 @@ def html_report(sample):
     hfile.write("</html>") 
     hfile.write(message)
     hfile.close()
-
 
 def main():
     parser = argparse.ArgumentParser()
