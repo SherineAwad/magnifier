@@ -47,7 +47,7 @@ def html_report(sample):
     hfile.write("<h2> GC Bias plot </h2>")
     gcbias_image = sample+".gc_bias_metrics.pdf"
     hfile.write("<center>")
-    gcbias_plot ="<iframe src='" +gcbias_image+"#scrollbar=0&toolbar=0&scrolling=0' scrolling='no' seamless='seamless'frameBorder='0' height='600' width='600'> </iframe> "
+    gcbias_plot ="<iframe src='" +gcbias_image+"#scrollbar=0&toolbar=0&scrolling=0' scrolling='no' seamless='seamless' frameBorder='0' height='600' width='600'> </iframe> "
     hfile.write(gcbias_plot)
     hfile.write("</center>")
 
