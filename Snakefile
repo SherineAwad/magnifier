@@ -17,6 +17,7 @@ rule all:
         expand("{sample}.wgs_metrics.txt", sample=SAMPLES),
         expand("{sample}.r_1_screen.txt", sample=SAMPLES),
         expand("{sample}.alignments.txt", sample =SAMPLES),
+        expand("{sample}.mapq.png", sample=SAMPLES),
         expand("{sample}.html",sample =SAMPLES)
 
 if config['PAIRED']:
@@ -110,15 +111,15 @@ rule check_quality:
       input:
         "{sample}.sorted.bam" 
       output:
-        "{sample}_alignments.txt"
+        "{sample}.alignments.txt",
+        "{sample}.mapq.png"
       shell: 
           """
-          samtools view -c -F 260 {input} >> {output} 
-          samtools view -c -F 256 {input} >> {output}
-          samtools view -c -f 4 {input} >> {output} 
+          samtools view -c -F 260 {input} >> {output[0]} 
+          samtools view -c -F 256 {input} >> {output[0]}
+          samtools view -c -f 4 {input} >> {output[0]} 
           samtools view -c {input} >> {output[0]} 
-          samtools view {input} | awk '{{if ($5<5) {{print $0}} }}'  | wc -l >>  {output}
-          samtools view {input} | awk '{{if ($5>=20) {{print $0}} }}' | wc -l >> {output}
+          python scripts/mapq.py --bam {input} --png {output[1]}
           """ 
 
 rule check_contamination: 

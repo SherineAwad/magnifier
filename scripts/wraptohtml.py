@@ -15,7 +15,7 @@ def html_report(sample):
     hfile.write("<h1> Contamination Check </h1> <br> </br>  ")
     contamination_image =sample+".r_1_screen.png"
     hfile.write("<center>")
-    contamination_plots = "<img src='" + contamination_image+ "' alt='Mapping to Multiple Genomes' class='cover' width='70%' height='70%' />"
+    contamination_plots = "<img src='" + contamination_image+ "' alt='Mapping to Multiple Genomes' class='cover' width='75%' height='75%' />"
     hfile.write(contamination_plots)
     hfile.write("</center>")
 
@@ -28,6 +28,11 @@ def html_report(sample):
     alignments_image =sample+".alignments.png"
     alignments_plots = "<img src='" + alignments_image+ "' alt='Alignments' width='100% height='100%'/>"
     hfile.write(alignments_plots)
+
+    hfile.write("<h2> Mapping Quality </h2> <br> </br>  ")
+    mquality_image =sample+".mapq.png"
+    mquality_plots = "<img src='" + mquality_image+ "' alt='Mapping Quality' width='100% height='100%'/>"
+    hfile.write(mquality_plots)
 
     hfile.write("<h1> Coverage</h1> ")
     coverage_txt= sample+".coverage.histogram.txt"

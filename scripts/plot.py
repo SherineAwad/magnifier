@@ -16,21 +16,17 @@ def plot_stats(sample):
    secondary_reads = int(infile.readline()) 
    unmapped_reads = int(infile.readline())
    total_reads = int(infile.readline())
-   qbasel5 = int(infile.readline()) 
-   qbaseg20 = int(infile.readline())
-   primary_reads = primary_reads / total_reads * 100 
-   secondary_reads = secondary_reads / total_reads * 100 
-   unmapped_reads = unmapped_reads / total_reads * 100 
-   qbasel5 = qbasel5 / total_reads * 100 
-   qbaseg20 = qbaseg20 / total_reads *100 
+   primary_reads = round(primary_reads / total_reads * 100, 2) 
+   secondary_reads = round(secondary_reads / total_reads * 100, 2) 
+   unmapped_reads = round(unmapped_reads / total_reads * 100, 2) 
 
    fig = go.Figure(data=[go.Table(
    header=dict(values=['Reads', 'Percentages'],
                 line_color='grey',
                 fill_color='cornflowerblue',
                 align='left', font=dict(color='black', family="Open Sans", size=14)),
-   cells=dict(values=[['Primary Reads', 'Secondary Reads', 'Unmapped Reads', 'Qbase < 5', 'Qbase > 20'], # 1st column
-                       [primary_reads, secondary_reads, unmapped_reads, qbasel5, qbaseg20]], # 2nd column
+   cells=dict(values=[['Primary Reads', 'Secondary Reads', 'Unmapped Reads'], # 1st column
+                       [str(primary_reads)+" %", str(secondary_reads)+" %", str(unmapped_reads)+" %"]], # 2nd column
                line_color='grey',
                fill_color='whitesmoke',
                align='left',font=dict(color='black', family="Open Sans", size=12)) ) ])
