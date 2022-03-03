@@ -13,7 +13,21 @@ Update config files for different with you samples names and other parameters.
 
 ### Wrapper all output to HTML Page 
 
-<h1> Contamination Check </h1> <br> </br>  <center><img src='sample1.s_1.r_1_screen.png' alt='Mapping to Multiple Genomes' class='cover' width='75%' height='75%' /></center><h1> Alignments </h1><h2> <a href='sample1.s_1.alignment_metrics.txt '> Alignments Metrics detailed here</a></h2><h2> Alignments summary </h2> <br> </br>  <img src='sample1.s_1.alignments.png' alt='Alignments' width='100% height='100%'/><h2> Mapping Quality </h2> <br> </br>  <img src='sample1.s_1.mapq.png' alt='Mapping Quality' width='100% height='100%'/><h1> Coverage</h1> <iframe src='sample1.s_1.coverage.histogram.txt#scrollbar=0&toolbar=0&scrolling=0' frameBorder='0' height='600' width='600'> </iframe> </center><h1> GC Bias</h1> <h2><a href='sample1.s_1.gc_bias_metrics.txt '> GC Bias Metrics detailed here</a></h2><h2> GC Bias plot </h2><center><iframe src='sample1.s_1.gc_bias_metrics.pdf#scrollbar=0&toolbar=0&scrolling=0' scrolling='no' seamless='seamless'frameBorder='0' height='600' width='600'> </iframe> </center><h1> Insert Size</h1> <h2> <a href='sample1.s_1.insert_size_metrics.txt'> Insert Size Metrics detailed here</a></h2><h2> Insert Size </h2><center><iframe src='sample1.s_1.insert_size_histogram.pdf#toolbar=0&scrollbar=0&scrolling=0' scrolling='no' seamless='seamless' frameBorder='0' height='600' width='600'> </iframe> </center></html><html>
+<h1>
+Contamination Check </h1> <br> </br>  <center><img src='sample1.s_1.r_1_screen.png' alt='Mapping to Multiple Genomes' class='cover' width='75%' height='75%' /></center><h1> Alignments </h1><h2> <a href='sample1.s_1.alignment_metrics.txt '> Alignments Metrics detailed here</a></h2><h2> Alignments summary </h2> <br> </br>  <img src='sample1.s_1.alignments.png' alt='Alignments' width='100% height='100%'/><h2> Mapping Quality </h2> <br> </br>  <img src='sample1.s_1.mapq.png' alt='Mapping Quality' width='100% height='100%'/><h1> Coverage
+</h1> 
+<div>
+<iframe src='sample1.s_1.coverage.histogram.txt#scrollbar=0&toolbar=0&scrolling=0' frameBorder='0' height='600' width='600'> </iframe>
+</div>
+ </center><h1> GC Bias</h1> <h2><a href='sample1.s_1.gc_bias_metrics.txt '> GC Bias Metrics detailed here</a></h2><h2> GC Bias plot </h2><center> 
+<div>
+<iframe src='sample1.s_1.gc_bias_metrics.pdf#scrollbar=0&toolbar=0&scrolling=0' scrolling='no' seamless='seamless'frameBorder='0' height='600' width='600'> </iframe> 
+</div>
+</center>
+<h1> Insert Size</h1> <h2> <a href='sample1.s_1.insert_size_metrics.txt'> Insert Size Metrics detailed here</a></h2><h2> Insert Size </h2><center> 
+<div><iframe src='sample1.s_1.insert_size_histogram.pdf#toolbar=0&scrollbar=0&scrolling=0' scrolling='no' seamless='seamless' frameBorder='0' height='600' width='600'> </iframe>
+</div>
+ </center></html><html>
 
 
 ### Run Snakemake 
