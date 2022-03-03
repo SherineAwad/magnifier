@@ -12,11 +12,17 @@ Update config files for different with you samples names and other parameters.
 
 ## Plots
  
-#### Mapping Percentages and Quality 
+#### Mapping Percentages  
 
 You will get a plot of percentages of primary and secondary alignments. In addition to percentage of unmapped reads and quality of mapped reads for each sample. 
 
    ![sample1_alignments.png](outputs/sample1.s_1.alignments.png)
+
+#### Mapping Quality 
+
+A density plot of the mapping quality of your  reads.
+
+   ![sample1.s_1.mapq.png](outputs/sample1.s_1.mapq.png) 
 
 #### GCBias  
 
