@@ -35,7 +35,7 @@ A density plot of the mapping quality of your  reads.
 
 Outputs overall coverage plot: 
 
-   ![sample1.s_1_coverage.png](outputs/sample1.s_1_coverage.png)
+   ![sample1.s_1.coverage.png](outputs/sample1.s_1.coverage.png)
 
 #### Coverage Histogram  
 
