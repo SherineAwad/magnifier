@@ -34,7 +34,7 @@ def html_report(sample):
     hfile.write(mquality_plots)
 
     hfile.write("<h2> Overall Coverage </h2> <br> </br>  ")
-    ocoverage_image =sample+"_coverage.png"
+    ocoverage_image =sample+".coverage.png"
     ocoverage_plots = "<img src='" + ocoverage_image+ "' alt='Over All Coverage' width='100% height='100%'/>"
     hfile.write(ocoverage_plots)    
  
