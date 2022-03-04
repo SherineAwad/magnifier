@@ -33,7 +33,12 @@ def html_report(sample):
     mquality_plots = "<img src='" + mquality_image+ "' alt='Mapping Quality' width='100% height='100%'/>"
     hfile.write(mquality_plots)
 
-    hfile.write("<h1> Coverage</h1> ")
+    hfile.write("<h2> Overall Coverage </h2> <br> </br>  ")
+    ocoverage_image =sample+"_coverage.png"
+    ocoverage_plots = "<img src='" + ocoverage_image+ "' alt='Over All Coverage' width='100% height='100%'/>"
+    hfile.write(ocoverage_plots)    
+ 
+    hfile.write("<h1> Histogram Coverage</h1> ")
     coverage_txt= sample+".coverage.histogram.txt"
     coverage_plots = "<iframe src='" +coverage_txt+"#scrollbar=0&toolbar=0&scrolling=0' frameBorder='0' height='600' width='1600'> </iframe> " 
     hfile.write(coverage_plots)

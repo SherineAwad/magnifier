@@ -30,22 +30,29 @@ A density plot of the mapping quality of your  reads.
     
    ![GCBias.png](outputs/GCbias.png)
 
-#### CoverageHistogram  
 
-   Outputs a histogram of coverage of your sample, a sample output example is:
+#### Overall Coverage 
+
+Outputs overall coverage plot: 
+
+   ![sample1.s_1_coverage.png](outputs/sample1.s_1_coverage.png)
+
+#### Coverage Histogram  
+
+Outputs a histogram of coverage of your sample, a sample output example is:
   
    ![coveragehist.png](outputs/coveragehist.png) 
 
 #### InsertSize
 
-   Outputs several metrics for insert size, and a wrapped up figure as follows: 
+Outputs several metrics for insert size, and a wrapped up figure as follows: 
 
    ![insertsize.png](outputs/insertsize.png)
 
 
 #### Check Contamination 
 
-   Outputs a nice plot as below to check contamination: 
+Outputs a nice plot as below to check contamination: 
   
    ![sample1_screen.png](outputs/sample1_screen.png)
 
@@ -53,7 +60,7 @@ A density plot of the mapping quality of your  reads.
 
    [sample1.s_1.html](outputs/sample1.s_1.html) 
 
-## More Detailed Text Stats 
+## More Detailed Metrics  
 
 The pipeline will also generate more text files with more detailed stats: 
 
