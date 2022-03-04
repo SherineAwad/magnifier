@@ -35,7 +35,7 @@ def html_report(sample):
 
     hfile.write("<h1> Coverage</h1> ")
     coverage_txt= sample+".coverage.histogram.txt"
-    coverage_plots = "<iframe src='" +coverage_txt+"#scrollbar=0&toolbar=0&scrolling=0' frameBorder='0' height='600' width='600'> </iframe> " 
+    coverage_plots = "<iframe src='" +coverage_txt+"#scrollbar=0&toolbar=0&scrolling=0' frameBorder='0' height='600' width='1600'> </iframe> " 
     hfile.write(coverage_plots)
     hfile.write("</center>")
 
