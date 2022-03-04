@@ -43,7 +43,7 @@ A density plot of the mapping quality of your  reads.
    ![insertsize.png](outputs/insertsize.png)
 
 
-#### check_contaminate 
+#### Check Contamination 
 
    Outputs a nice plot as below to check contamination: 
   
@@ -53,11 +53,31 @@ A density plot of the mapping quality of your  reads.
 
    [sample1.s_1.html](outputs/sample1.s_1.html) 
 
+## More Detailed Text Stats 
 
-where n is the number of cores for example for 10 cores use:
+The pipeline will also generate more text files with more detailed stats: 
+
+#### More Detailed Alignments Metrics 
+
+   [sample1.s_1.alignment_metrics.txt](/outputs/sample1.s_1.alignment_metrics.txt)
+ 
+
+#### More Detailed GC Bias Metrics 
+
+   [sample1.s_1.gc_bias_metrics.txt](/outputs/sample1.s_1.gc_bias_metrics.txt)
+
+#### More Detailed Insert Size Metrics 
+
+   [sample1.s_1.insert_size_metrics.txt](/outputs/sample1.s_1.insert_size_metrics.txt)
 
 
-    snakemake -j10 
+### Run Snakemake 
+
+Use: 
+
+   snakemake -jn 
+ 
+to run the pipeline where n is the number of cores for example for 10 cores use. Snakemake has to be installed. 
 
 ### Use conda 
 
@@ -72,6 +92,7 @@ For example, for 10 cores use:
     snakemake -j10 --use-conda 
 
 This will pull automatically the same versiosn of tools we used. Conda has to be installed in the system, in addition to snakemake. 
+Conda as well has to be installed. 
 
 
 ### Dry Run
